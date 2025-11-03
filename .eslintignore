@@ -1,0 +1,4 @@
+node_modules
+jest.config.ts
+app.test.ts
+*.config.ts

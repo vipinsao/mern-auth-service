@@ -6,16 +6,16 @@ import { defineConfig } from "eslint/config";
 export default defineConfig([
   // For JavaScript files
   {
-    files: ["**/*.js"],
+    files: ["**/*.js,"],
     languageOptions: {
       sourceType: "module",
-      globals: globals.node, // use Node environment for JS too
+      globals: { ...globals.node }, // use Node environment for JS too
     },
   },
 
   // For TypeScript files
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["src/**/*.{ts,tsx}"],
     languageOptions: {
       parser: tseslint.parser, // let ESLint understand TS
       parserOptions: {
@@ -30,6 +30,27 @@ export default defineConfig([
     rules: {
       ...tseslint.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/explicit-function-return-type": "off",
+    },
+  },
+
+  // For Test Files
+  {
+    files: ["**/*.test.ts", "jest.config.ts"],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        sourceType: "module",
+        ecmaVersion: "latest",
+      },
+      globals: globals.node,
+    },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
     },
   },
