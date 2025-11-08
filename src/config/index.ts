@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 
-config();
+config({ debug: false });
 
 const { PORT, NODE_ENV } = process.env;
 
