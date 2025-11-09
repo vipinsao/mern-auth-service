@@ -11,12 +11,11 @@ import authRouter from "./routes/auth.js";
 
 const app = express();
 
-app.use(express.json());
-
 app.get("/", (req, res) => {
   res.send("Welcome to Auth Service");
 });
 
+app.use(express.json());
 app.use("/auth", authRouter);
 
 // creating global error handler middleware
