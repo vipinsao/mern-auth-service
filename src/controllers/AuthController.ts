@@ -46,13 +46,15 @@ export class AuthController {
       const accessToken = this.tokenService.generateAccessToken(payload);
 
       //persist the refreshToken
-      const MS_IN_YEAR = 1000 * (60 * 60 * 24 * 365); //1year->(leap year)
-      const refreshTokenRepository = AppDataSource.getRepository(RefreshToken);
-      const newRefreshToken = await refreshTokenRepository.save({
-        user: savedUser,
-        userId: savedUser.id,
-        expiresAt: new Date(Date.now() + MS_IN_YEAR),
-      });
+      const newRefreshToken =
+        await this.tokenService.persistRefreshToken(savedUser);
+      // const MS_IN_YEAR = 1000 * (60 * 60 * 24 * 365); //1year->(leap year)
+      // const refreshTokenRepository = AppDataSource.getRepository(RefreshToken);
+      // const newRefreshToken = await refreshTokenRepository.save({
+      //   user: savedUser,
+      //   userId: savedUser.id,
+      //   expiresAt: new Date(Date.now() + MS_IN_YEAR),
+      // });
 
       const refreshToken = this.tokenService.generateRefreshToken({
         ...payload,
