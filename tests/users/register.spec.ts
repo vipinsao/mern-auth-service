@@ -74,5 +74,28 @@ describe("POST /auth/register", () => {
       expect(users[0].lastName).toBe(userData.lastName);
       expect(users[0].email).toBe(userData.email);
     });
+
+    it("should return an userId of the present User", async () => {
+      //AAA
+      //Arrange
+      const userData = {
+        firstName: "Vipin",
+        lastName: "Sao",
+        email: "vipinsao3@gmail.com",
+        password: "secret",
+      };
+
+      //ACT
+      const response = await request(app).post("/auth/register").send(userData);
+
+      //Assert
+      expect(response.body).toHaveProperty("userId");
+      const userRepository = connection.getRepository(User);
+      const users = await userRepository.find();
+
+      expect((response.body as Record<string, string>).userId).toBe(
+        users[0].id,
+      );
+    });
   });
 });
