@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { User } from "../entity/User";
 import { UserData } from "../types/index";
 import createHttpError from "http-errors";
-import { Roles } from "../constants";
+import { Roles } from "../constants/index.js";
 import bcrypt from "bcrypt";
 
 export class UserService {

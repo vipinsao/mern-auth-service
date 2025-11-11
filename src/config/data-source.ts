@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
 
   //Dont use this in production - may lose data
   //always keep it false
-  synchronize: false,
+  synchronize: true,
   entities: [User, RefreshToken],
   migrations: [],
   subscribers: [],
